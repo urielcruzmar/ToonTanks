@@ -16,15 +16,29 @@ class TOONTANKS_API ATank : public ABasePawn
 
 public:
 	ATank();
-	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+	
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+	
 private:
-	UPROPERTY(VisibleAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	// Components
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class USpringArmComponent* SpringArmComp;
-	UPROPERTY(VisibleAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class UCameraComponent* CameraComp;
-
+	// Variables
+	UPROPERTY(EditAnywhere, Category="Movement")
+	float Speed = 300.f;
+	UPROPERTY(EditAnywhere, Category="Movement")
+	float TurnRate = 100.f;
+	// Functions
 	void Move(float Value);
+	void Turn(float Value);
+	// Player Controller Reference
+	APlayerController* PlayerControllerRef;
 };
