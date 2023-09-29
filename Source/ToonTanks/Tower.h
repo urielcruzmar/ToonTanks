@@ -26,4 +26,9 @@ private:
 	// Variables
 	UPROPERTY(EditAnywhere, Category="Combat")
 	float FireRange = 600.f;
+	// Firing
+	FTimerHandle FireRateTimerHandle;
+	float FireRate = 2.f;
+	void CheckFireCondition();
+	bool InFireRange() const;
 };

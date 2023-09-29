@@ -21,6 +21,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+	
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 }
 
 void ATank::Tick(float DeltaTime)
@@ -34,7 +36,6 @@ void ATank::Tick(float DeltaTime)
 			ECC_Visibility,
 			false,
 			HitResult);
-		DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20.f,12,FColor::Red);
 		RotateTurret(HitResult.ImpactPoint);
 	}
 }
